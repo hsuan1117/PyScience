@@ -1,6 +1,9 @@
 from PIL import Image
 import numpy as np
 import time
+import plotly.graph_objects as go
+import plotly.express as px
+fig = go.Figure()
 
 start_time = time.time()
 # 動態輸入圖片
@@ -10,10 +13,10 @@ pic_path = "img4.jpg" # input("Image path?")
 pic = Image.open(pic_path)
 
 # 轉為灰階模式
-pic = pic.convert("F")
+pic = pic.convert("L")
 
 # 顯示圖片
-pic.show()
+# pic.show()
 # print(pic.mode)
 
 # 讀取圖片 0是黑，255是白
@@ -68,5 +71,12 @@ print("\n以下列出每個顏色共出現過幾次(以次數排序)")
 for item in range(len(data)):
     print("{} => {}個".format(data[item][0],data[item][1]))
 
-
 print("--- %s seconds ---" % (time.time() - start_time))
+
+fig.add_trace(go.Scatter(
+    x=[v[0] for v in data],
+    y=[v[1] for v in data],
+    mode='markers',
+    name='markers'
+))
+fig.show()
