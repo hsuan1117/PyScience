@@ -3,12 +3,18 @@ import numpy as np
 import time
 import plotly.graph_objects as go
 import plotly.express as px
+
 fig = go.Figure()
 
 
+def getPixels(pic_path):
+    pic = Image.open(pic_path)
+    pic = pic.convert("L")
+    pix = np.asarray(pic)
+    return pix
 
 
-def calc(pic_path) :
+def calc(pic_path):
     # 動態輸入圖片
 
     # 開啟一張圖片
