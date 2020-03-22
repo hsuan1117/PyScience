@@ -3,11 +3,12 @@ import numpy as np
 import time
 import plotly.graph_objects as go
 import plotly.express as px
+
 fig = go.Figure()
 
 start_time = time.time()
 # 動態輸入圖片
-pic_path = "img4.jpg" # input("Image path?")
+pic_path = "Dataset/img5.jpg"  # input("Image path?")
 
 # 開啟一張圖片
 pic = Image.open(pic_path)
@@ -24,7 +25,7 @@ pix = np.asarray(pic)
 
 print("以下列出非白色的座標")
 idx = 0
-with open('output_{}.txt'.format(pic_path), 'w') as f:
+with open('Output/output_{}.txt'.format(pic_path.split("/")[len(pic_path.split("/"))-1]), 'w') as f:
     for item in range(len(pix)):
         for item2 in range(len(pix[item])):
             if pix[item][item2] < 200 :

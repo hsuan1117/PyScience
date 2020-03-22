@@ -4,6 +4,7 @@ import time
 import plotly.graph_objects as go
 import plotly.express as px
 
+MAX_BLACK_COLOR_NUM = 255
 fig = go.Figure()
 
 
@@ -16,7 +17,7 @@ def getPixels(pic_path):
 
 def calc(pic_path):
     # 動態輸入圖片
-
+    print(pic_path)
     # 開啟一張圖片
     pic = Image.open(pic_path)
 
@@ -37,10 +38,10 @@ def calc(pic_path):
         last = -1
 
         for item2 in range(len(pix[item])):
-            if pix[item][item2] < 200 and last == item2 - 1:
+            if pix[item][item2] < MAX_BLACK_COLOR_NUM and last == item2 - 1:
                 cnt += 1
                 last = item2
-            elif pix[item][item2] < 200:
+            elif pix[item][item2] < MAX_BLACK_COLOR_NUM:
                 if cnt != 0:
                     cnt2 += 1
                     arr.append(pix[item][item2])
@@ -53,31 +54,50 @@ def calc(pic_path):
 
     data = sorted(data.items(), key=lambda d: d[1])
     print("--- %s seconds ---" % (time.time() - start_time))
+    print("")
     return data
 
 
+_data = calc("Dataset/img1.jpg")
 fig.add_trace(go.Scatter(
-    x=[v[0] for v in calc("img1.jpg")],
-    y=[v[1] for v in calc("img1.jpg")],
+    x=[v[0] for v in _data],
+    y=[v[1] for v in _data],
     mode='markers',
     name='markers'
 ))
+
+_data = calc("Dataset/img2.jpg")
 fig.add_trace(go.Scatter(
-    x=[v[0] for v in calc("img2.jpg")],
-    y=[v[1] for v in calc("img2.jpg")],
+    x=[v[0] for v in _data],
+    y=[v[1] for v in _data],
     mode='markers',
     name='markers'
 ))
+
+_data = calc("Dataset/img3.jpg")
 fig.add_trace(go.Scatter(
-    x=[v[0] for v in calc("img3.jpg")],
-    y=[v[1] for v in calc("img3.jpg")],
+    x=[v[0] for v in _data],
+    y=[v[1] for v in _data],
     mode='markers',
     name='markers'
 ))
+
+_data = calc("Dataset/img4.jpg")
 fig.add_trace(go.Scatter(
-    x=[v[0] for v in calc("img4.jpg")],
-    y=[v[1] for v in calc("img4.jpg")],
+    x=[v[0] for v in _data],
+    y=[v[1] for v in _data],
     mode='markers',
     name='markers'
 ))
+
+fig.update_layout(
+    title="指紋清晰度實驗",
+    xaxis_title="灰階值 (越大越白)",
+    yaxis_title="數量",
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="#7f7f7f"
+    )
+)
 fig.show()
