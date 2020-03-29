@@ -67,22 +67,32 @@ def getDistance(pic_path="Dataset/img1.jpg"):
                         arr.append(end-start+1)
                         total.append(end-start+1)
             # print("{} {} {}".format(j,start,end))
+        """
         for i in range(len(arr)):
             if not i == len(arr)-1:
-                print("[{:03d}] <-- {:03d} --> ".format(arr[i],arr2[i]),end="")
+                try:
+                    print("[{:03d}] <-- {:03d} --> ".format(arr[i],arr2[i]),end="")
+                except:
+                    print("",end="")
             else:
                 print("[{:03d}]".format(arr[i]))
+        """
+
     print("===寬度===")
     print("平均  {}".format(np.mean(total)))
     print("標準差 {}".format(np.std(total)))
-    print("眾數 {}".format(np.argmax(np.bincount(total))))
+    # print("眾數 {}".format(np.argmax(np.bincount(total))))
     print("四分位數 {} {} {}".format(*np.percentile(total, [25, 50, 75])))
     print("")
     print("===間隔===")
     print("平均 {}".format(np.mean(total2)))
     print("標準差 {}".format(np.std(total2)))
-    print("眾數 {}".format(np.argmax(np.bincount(total2))))
+    # print("眾數 {}".format(np.argmax(np.bincount(total2))))
     print("四分位數 {} {} {}".format(*np.percentile(total2, [25, 50, 75])))
 
 
-getDistance("Dataset/img3.jpg")
+getDistance("Dataset/乙.jpg")
+print("")
+getDistance("Dataset/甲.jpg")
+print("")
+getDistance("Dataset/丙.jpg")

@@ -8,7 +8,7 @@ fig = go.Figure()
 
 start_time = time.time()
 # 動態輸入圖片
-pic_path = "Dataset/img5.jpg"  # input("Image path?")
+pic_path = "Dataset/甲.jpg"  # input("Image path?")
 
 # 開啟一張圖片
 pic = Image.open(pic_path)
